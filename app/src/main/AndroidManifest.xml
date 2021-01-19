@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntentChonhinhanh24112020">
         <activity android:name=".ListImageActivity"></activity>
-        <activity android:name=".HistoryActivity" />
+        <activity android:name=".HighScoreActivity" />
         <activity android:name=".PlayGameActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
