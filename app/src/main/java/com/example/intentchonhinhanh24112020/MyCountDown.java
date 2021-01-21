@@ -19,6 +19,7 @@ public class MyCountDown {
     }
 
     public void startTimer(long totalTime , long intervalTime){
+        // Kiểm tra đang chạy timer thì cancel
         if (isRunning){
             mCountDownTimer.cancel();
         }
@@ -26,7 +27,9 @@ public class MyCountDown {
             @Override
             public void onTick(long millisUntilFinished) {
                 isRunning = true;
+                // Xử lý thời gian cho các máy ảo 24 -> 29
                 if (millisUntilFinished / 1000 > 0){
+                    // Trả dữ liệu thời gian
                     if (mOnListenerTimer != null){
                         mOnListenerTimer.onTick(millisUntilFinished);
                     }
@@ -37,6 +40,7 @@ public class MyCountDown {
             @Override
             public void onFinish() {
                 isRunning = false;
+                mOnListenerTimer.onTick(0);
             }
         };
         mCountDownTimer.start();

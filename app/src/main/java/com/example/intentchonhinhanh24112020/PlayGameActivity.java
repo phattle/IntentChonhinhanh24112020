@@ -20,23 +20,25 @@ public class PlayGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
 
-        mTvScore = findViewById(R.id.textViewScore);
-        mTvTime = findViewById(R.id.textViewTime);
-        mImgReal = findViewById(R.id.imageViewImageReal);
-        mImgPick = findViewById(R.id.imageViewImagePick);
+        init();
+        event();
 
-        mMyCountDown = MyCountDown.getInstance();
+    }
 
-        mMyCountDown.startTimer(10000, 1000);
+    private void event() {
+        // Chạy thời gian để bắt đầu chơi
+        mMyCountDown.startTimer(4000, 1000);
 
+        // Kiểm tra thời gian đếm ngược
         mMyCountDown.getTimeCurrent(new OnListenerTimer() {
             @Override
             public void onTick(long timeCurrent) {
-                Toast.makeText(PlayGameActivity.this, timeCurrent + "", Toast.LENGTH_SHORT).show();
+                mTvTime.setText("Time : "  + timeCurrent / 1000);
             }
         });
 
 
+        // Bắt sự kiện chuyển qua màn hình chọn danh sách hình
         mImgPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,5 +46,14 @@ public class PlayGameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void init() {
+        mTvScore = findViewById(R.id.textViewScore);
+        mTvTime = findViewById(R.id.textViewTime);
+        mImgReal = findViewById(R.id.imageViewImageReal);
+        mImgPick = findViewById(R.id.imageViewImagePick);
+
+        mMyCountDown = MyCountDown.getInstance();
     }
 }
