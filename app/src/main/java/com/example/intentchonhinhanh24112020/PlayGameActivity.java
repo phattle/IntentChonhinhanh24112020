@@ -30,7 +30,9 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void mapView() {
+        // Xử lý random
         int index = new Random().nextInt(mArrAnimals.length);
+        // Lấy dữ liệu từ tên file
         mResourceImgRandom = getResources().getIdentifier(mArrAnimals[index],"drawable",getPackageName());
         mImgReal.setImageResource(mResourceImgRandom);
     }
