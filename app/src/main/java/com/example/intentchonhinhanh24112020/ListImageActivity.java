@@ -2,6 +2,7 @@ package com.example.intentchonhinhanh24112020;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -51,7 +52,10 @@ public class ListImageActivity extends AppCompatActivity {
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(ListImageActivity.this, imageView.getTag()  + "", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ListImageActivity.this,PlayGameActivity.class);
+                            intent.putExtra("resourceimage", (Integer) imageView.getTag());
+                            setResult(RESULT_OK , intent);
+                            finish();
                         }
                     });
                     tableRow.addView(imageView);
@@ -60,7 +64,13 @@ public class ListImageActivity extends AppCompatActivity {
             mTableLayout.addView(tableRow);
         }
 
-
-
+        MyCountDown.getInstance().getTimeCurrent(new OnListenerTimer() {
+            @Override
+            public void onTick(long timeCurrent) {
+//                if (timeCurrent == 0){
+//                    onBackPressed();
+//                }
+            }
+        });
     }
 }

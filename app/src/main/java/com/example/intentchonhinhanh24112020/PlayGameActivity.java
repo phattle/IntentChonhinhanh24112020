@@ -1,5 +1,6 @@
 package com.example.intentchonhinhanh24112020;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -54,7 +55,9 @@ public class PlayGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PlayGameActivity.this,ListImageActivity.class);
-                startActivity(intent);
+                // Sử dụng hàm startActivityForResult khi muốn nhận kết quả từ màn hình ListImageActivity
+                // Request Code : là key dùng để kiểm tra dữ liệu mà màn hình ListImageActivity trả về
+                startActivityForResult(intent,123);
             }
         });
     }
