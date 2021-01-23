@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +23,7 @@ public class ListImageActivity extends AppCompatActivity {
     int mColumn = 3;
     String [] mArrAnimals;
     int mPosition = 0;
+    int mResourcePosition = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +44,16 @@ public class ListImageActivity extends AppCompatActivity {
                 mPosition = (mColumn * i) + y ;
                 if (mPosition < mArrAnimals.length){
                     ImageView imageView = new ImageView(this);
-                    int resourcePosition = getResources().getIdentifier(mArrAnimals[mPosition], "drawable" , getPackageName());
-                    imageView.setImageResource(resourcePosition);
+                    mResourcePosition = getResources().getIdentifier(mArrAnimals[mPosition], "drawable" , getPackageName());
+                    imageView.setTag(mResourcePosition);
+                    imageView.setImageResource(mResourcePosition);
+
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(ListImageActivity.this, imageView.getTag()  + "", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     tableRow.addView(imageView);
                 }
             }
