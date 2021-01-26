@@ -11,7 +11,7 @@ public class AppDialog {
     private AppDialog(){
 
     }
-    public static void showDialogTotalScore(Context context){
+    public static void showDialogTotalScore(Context context, OnListenerDialogTotalScore onListenerDialogTotalScore){
         Dialog dialog = new Dialog(context);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.dialog_total_score,null, false);
@@ -23,14 +23,16 @@ public class AppDialog {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Save", Toast.LENGTH_SHORT).show();
+                onListenerDialogTotalScore.onSave();
+                dialog.cancel();
             }
         });
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onListenerDialogTotalScore.onExit();
+                dialog.cancel();
             }
         });
 

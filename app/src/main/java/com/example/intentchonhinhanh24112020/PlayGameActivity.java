@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,17 +34,14 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void mapView() {
+        // start time
+        startTime(4000 , 1000);
         // Xử lý random
-        int index = new Random().nextInt(mArrAnimals.length);
-        // Lấy dữ liệu từ tên file
-        mResourceImgRandom = getResources().getIdentifier(mArrAnimals[index],"drawable",getPackageName());
-        mImgReal.setImageResource(mResourceImgRandom);
+        randomImage();
+
     }
 
     private void event() {
-        // Chạy thời gian để bắt đầu chơi
-        mMyCountDown.startTimer(4000, 1000);
-
         // Bắt sự kiện chuyển qua màn hình chọn danh sách hình
         mImgPick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,15 +85,26 @@ public class PlayGameActivity extends AppCompatActivity {
         // 1 : Co du lieu hinh
         // 2 : Het thoi gian
         // 3 : Khong chon hinh
+        mMyCountDown.stopTimer();
+        mImgPick.setEnabled(false);
         if (requestCode == 123 && resultCode == RESULT_OK){
             mResourceImgPick = data.getIntExtra("resourceimage",-1);
             mImgPick.setImageResource(mResourceImgPick);
             if (mResourceImgPick == mResourceImgRandom){
                 mScore++;
                 Toast.makeText(this, "Chon hinh chinh xac", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mImgPick.setImageResource(R.drawable.nophoto);
+                        startTime(4000 , 1000);
+                        randomImage();
+                        mImgPick.setEnabled(true);
+                    }
+                },1500);
             }else{
                 Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
-                AppDialog.showDialogTotalScore(this);
+//                AppDialog.showDialogTotalScore(this);
             }
             mTvScore.setText("Score : " + mScore +"");
         }
@@ -108,5 +117,15 @@ public class PlayGameActivity extends AppCompatActivity {
                 Toast.makeText(this, "Ban chua chon hinh", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void startTime(long totalTime , long interval){
+        mMyCountDown.startTimer(totalTime, interval);
+    }
+    private void randomImage(){
+        int index = new Random().nextInt(mArrAnimals.length);
+        // Lấy dữ liệu từ tên file
+        mResourceImgRandom = getResources().getIdentifier(mArrAnimals[index],"drawable",getPackageName());
+        mImgReal.setImageResource(mResourceImgRandom);
     }
 }
