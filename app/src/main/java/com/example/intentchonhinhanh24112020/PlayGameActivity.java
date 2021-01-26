@@ -31,6 +31,8 @@ public class PlayGameActivity extends AppCompatActivity {
         init();
         mapView();
         event();
+        // Task 1 : Xử hiển thị dialog cho việc hết thời gian
+        // Task 2 : Share preference
     }
 
     private void mapView() {
@@ -62,6 +64,7 @@ public class PlayGameActivity extends AppCompatActivity {
             @Override
             public void onTick(long timeCurrent) {
                 mTvTime.setText("Time : "  + timeCurrent / 1000);
+
             }
         });
     }
