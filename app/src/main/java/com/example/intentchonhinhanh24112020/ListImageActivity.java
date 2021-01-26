@@ -67,9 +67,12 @@ public class ListImageActivity extends AppCompatActivity {
         MyCountDown.getInstance().getTimeCurrent(new OnListenerTimer() {
             @Override
             public void onTick(long timeCurrent) {
-//                if (timeCurrent == 0){
-//                    onBackPressed();
-//                }
+                if (timeCurrent == 0){
+                    Intent intent = new Intent(ListImageActivity.this,PlayGameActivity.class);
+                    intent.putExtra("resourceimage", 0);
+                    setResult(RESULT_CANCELED , intent);
+                    finish();
+                }
             }
         });
     }
