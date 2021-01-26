@@ -22,6 +22,7 @@ public class PlayGameActivity extends AppCompatActivity {
     String[] mArrAnimals;
     int mResourceImgRandom = 0;
     int mResourceImgPick = -1;
+    int mScore = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +90,20 @@ public class PlayGameActivity extends AppCompatActivity {
         if (requestCode == 123 && resultCode == RESULT_OK){
             mResourceImgPick = data.getIntExtra("resourceimage",-1);
             mImgPick.setImageResource(mResourceImgPick);
+            if (mResourceImgPick == mResourceImgRandom){
+                mScore++;
+                Toast.makeText(this, "Chon hinh chinh xac", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
+                AppDialog.showDialogTotalScore(this);
+            }
+            mTvScore.setText("Score : " + mScore +"");
         }
         if (requestCode == 123 && resultCode == RESULT_CANCELED){
             if (data != null){
                 mResourceImgPick = data.getIntExtra("resourceimage",-1);
                 mTvTime.setText("Time : "  + 0);
                 Toast.makeText(this, "Het gio!!", Toast.LENGTH_SHORT).show();
-
             }else{
                 Toast.makeText(this, "Ban chua chon hinh", Toast.LENGTH_SHORT).show();
             }

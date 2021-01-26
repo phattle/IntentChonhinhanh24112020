@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:paddingVertical="5dp"
+    android:layout_gravity="center"
+    android:background="#94B234"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textViewTotalScore"
+        android:gravity="center"
+        android:textColor="#FDFF3A"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:text="Total Score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edittextName"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#EEEF77"
+        android:hint="Name"
+        android:layout_below="@id/textViewTotalScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/buttonSave"
+        android:text="Save"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/edittextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/buttonExit"
+        android:layout_alignParentRight="true"
+        android:text="Exit"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/edittextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
