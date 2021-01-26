@@ -21,6 +21,7 @@ public class PlayGameActivity extends AppCompatActivity {
     MyCountDown mMyCountDown;
     String[] mArrAnimals;
     int mResourceImgRandom = 0;
+    int mResourceImgPick = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,5 +73,18 @@ public class PlayGameActivity extends AppCompatActivity {
         mArrAnimals = getResources().getStringArray(R.array.arrAnimals);
 
         mMyCountDown = MyCountDown.getInstance();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Cac truong hop
+        // 1 : Co du lieu hinh
+        // 2 : Het thoi gian
+        // 3 : Khong chon hinh
+        if (requestCode == 123 && resultCode == RESULT_OK){
+            mResourceImgPick = data.getIntExtra("resourceimage",-1);
+            mImgPick.setImageResource(mResourceImgPick);
+        }
     }
 }
