@@ -43,14 +43,6 @@ public class PlayGameActivity extends AppCompatActivity {
         // Chạy thời gian để bắt đầu chơi
         mMyCountDown.startTimer(4000, 1000);
 
-        // Kiểm tra thời gian đếm ngược
-        mMyCountDown.getTimeCurrent(new OnListenerTimer() {
-            @Override
-            public void onTick(long timeCurrent) {
-                mTvTime.setText("Time : "  + timeCurrent / 1000);
-            }
-        });
-
         // Bắt sự kiện chuyển qua màn hình chọn danh sách hình
         mImgPick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +51,18 @@ public class PlayGameActivity extends AppCompatActivity {
                 // Sử dụng hàm startActivityForResult khi muốn nhận kết quả từ màn hình ListImageActivity
                 // Request Code : là key dùng để kiểm tra dữ liệu mà màn hình ListImageActivity trả về
                 startActivityForResult(intent,123);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Kiểm tra thời gian đếm ngược
+        mMyCountDown.getTimeCurrent(new OnListenerTimer() {
+            @Override
+            public void onTick(long timeCurrent) {
+                mTvTime.setText("Time : "  + timeCurrent / 1000);
             }
         });
     }
@@ -85,6 +89,16 @@ public class PlayGameActivity extends AppCompatActivity {
         if (requestCode == 123 && resultCode == RESULT_OK){
             mResourceImgPick = data.getIntExtra("resourceimage",-1);
             mImgPick.setImageResource(mResourceImgPick);
+        }
+        if (requestCode == 123 && resultCode == RESULT_CANCELED){
+            if (data != null){
+                mResourceImgPick = data.getIntExtra("resourceimage",-1);
+                mTvTime.setText("Time : "  + 0);
+                Toast.makeText(this, "Het gio!!", Toast.LENGTH_SHORT).show();
+
+            }else{
+                Toast.makeText(this, "Ban chua chon hinh", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
