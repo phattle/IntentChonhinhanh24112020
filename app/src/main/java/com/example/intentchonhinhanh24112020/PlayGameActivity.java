@@ -107,7 +107,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 },1500);
             }else{
                 Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
-//                AppDialog.showDialogTotalScore(this);
+                showDialogSaveScore();
             }
             mTvScore.setText("Score : " + mScore +"");
         }
@@ -119,6 +119,7 @@ public class PlayGameActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(this, "Ban chua chon hinh", Toast.LENGTH_SHORT).show();
             }
+            showDialogSaveScore();
         }
     }
 
@@ -130,5 +131,18 @@ public class PlayGameActivity extends AppCompatActivity {
         // Lấy dữ liệu từ tên file
         mResourceImgRandom = getResources().getIdentifier(mArrAnimals[index],"drawable",getPackageName());
         mImgReal.setImageResource(mResourceImgRandom);
+    }
+    private void showDialogSaveScore(){
+        AppDialog.showDialogTotalScore(PlayGameActivity.this, new OnListenerDialogTotalScore() {
+            @Override
+            public void onSave(String name) {
+                Toast.makeText(PlayGameActivity.this, name, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onExit() {
+                finish();
+            }
+        });
     }
 }

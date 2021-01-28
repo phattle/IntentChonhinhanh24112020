@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class AppDialog {
@@ -19,11 +20,17 @@ public class AppDialog {
 
         Button btnSave = view.findViewById(R.id.buttonSave);
         Button btnExit = view.findViewById(R.id.buttonExit);
+        EditText edtName = view.findViewById(R.id.edittextName);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onListenerDialogTotalScore.onSave();
+                String name = edtName.getText().toString();
+                if (name.isEmpty()){
+                    Toast.makeText(context, "Bạn chưa nhập tên", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                onListenerDialogTotalScore.onSave(name);
                 dialog.cancel();
             }
         });
@@ -35,7 +42,7 @@ public class AppDialog {
                 dialog.cancel();
             }
         });
-
+        dialog.setCancelable(false);
         dialog.show();
     }
 }
