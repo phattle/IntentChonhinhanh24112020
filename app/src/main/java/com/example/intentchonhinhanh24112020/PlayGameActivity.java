@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -138,7 +139,8 @@ public class PlayGameActivity extends AppCompatActivity {
         AppDialog.showDialogTotalScore(PlayGameActivity.this, mScore , new OnListenerDialogTotalScore() {
             @Override
             public void onSave(String name) {
-                Toast.makeText(PlayGameActivity.this, name, Toast.LENGTH_SHORT).show();
+                AppSharePreference.getInstance(PlayGameActivity.this).saveScore(name , mScore);
+                finish();
             }
 
             @Override
