@@ -16,12 +16,22 @@
         android:text="Total Score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_below="@id/textViewTotalScore"
+        android:id="@+id/textViewScore"
+        android:gravity="center"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:text="10 point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/edittextName"
         android:layout_marginTop="10dp"
         android:textColorHint="#EEEF77"
         android:hint="Name"
-        android:layout_below="@id/textViewTotalScore"
+        android:layout_below="@id/textViewScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button

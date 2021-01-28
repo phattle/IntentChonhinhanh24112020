@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AppDialog {
@@ -13,7 +14,7 @@ public class AppDialog {
     private AppDialog(){
 
     }
-    public static void showDialogTotalScore(Context context, OnListenerDialogTotalScore onListenerDialogTotalScore){
+    public static void showDialogTotalScore(Context context, int score , OnListenerDialogTotalScore onListenerDialogTotalScore){
         if (mDialog == null){
             mDialog = new Dialog(context);
             LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -23,6 +24,9 @@ public class AppDialog {
             Button btnSave = view.findViewById(R.id.buttonSave);
             Button btnExit = view.findViewById(R.id.buttonExit);
             EditText edtName = view.findViewById(R.id.edittextName);
+            TextView tvScore = view.findViewById(R.id.textViewScore);
+
+            tvScore.setText(score + " point");
 
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -49,7 +53,7 @@ public class AppDialog {
         }else{
             mDialog.cancel();
             mDialog = null;
-            showDialogTotalScore(context,onListenerDialogTotalScore);
+            showDialogTotalScore(context,score,onListenerDialogTotalScore);
         }
 
     }

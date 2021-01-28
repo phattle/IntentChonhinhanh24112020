@@ -135,7 +135,7 @@ public class PlayGameActivity extends AppCompatActivity {
         mImgReal.setImageResource(mResourceImgRandom);
     }
     private void showDialogSaveScore(){
-        AppDialog.showDialogTotalScore(PlayGameActivity.this, new OnListenerDialogTotalScore() {
+        AppDialog.showDialogTotalScore(PlayGameActivity.this, mScore , new OnListenerDialogTotalScore() {
             @Override
             public void onSave(String name) {
                 Toast.makeText(PlayGameActivity.this, name, Toast.LENGTH_SHORT).show();
