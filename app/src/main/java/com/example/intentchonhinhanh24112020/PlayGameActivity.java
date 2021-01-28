@@ -64,7 +64,9 @@ public class PlayGameActivity extends AppCompatActivity {
             @Override
             public void onTick(long timeCurrent) {
                 mTvTime.setText("Time : "  + timeCurrent / 1000);
-
+                if (timeCurrent == 0){
+                    showDialogSaveScore();
+                }
             }
         });
     }
