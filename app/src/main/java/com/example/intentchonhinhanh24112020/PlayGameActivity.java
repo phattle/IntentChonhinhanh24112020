@@ -1,5 +1,6 @@
 package com.example.intentchonhinhanh24112020;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -42,5 +43,18 @@ public class PlayGameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //các truong hop
+        // 1 : co du lieu hinh
+        // 2: Het thoi gian
+        // 3: khong chon hinh
+        if (requestCode == 123 && resultCode == RESULT_OK){
+
+        }
+
     }
 }
